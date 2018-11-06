@@ -34,11 +34,17 @@
 	    	for (var i = 0; i < n; i++) {
 	    		if(document.getElementsByClassName("result")[i].classList.contains("checked")==false)
 	    		{
-	  
-					document.getElementsByClassName("result")[i].classList.add("checked");
-					document.getElementsByClassName("checkbox")[i].checked=true;
-					number--;
-	    	        nb(number);
+	                if(document.getElementsByClassName("result")[i].classList.contains("active")==true)
+		    	    {
+		    	       document.getElementsByClassName("result")[i].classList.add("display");
+		    		   document.getElementsByClassName("result")[i].classList.remove("active");
+		    		   document.getElementsByClassName("result")[i].classList.add("completed");
+		    		   document.getElementById("checkall").classList.add("hidden");
+		    	    }
+		    	       document.getElementsByClassName("result")[i].classList.add("checked");
+					   document.getElementsByClassName("checkbox")[i].checked=true;
+					   number--;
+		    	       nb(number);					
 	    		}
 	    	}
 	    }
@@ -46,8 +52,15 @@
 	    {
 	    	for (var i = 0; i < n; i++) {
 	    		if(document.getElementsByClassName("result")[i].classList.contains("checked")==true)
-	    		{  
-					document.getElementsByClassName("result")[i].classList.remove("checked");
+	    		{
+	    			if(document.getElementsByClassName("result")[i].classList.contains("completed")==true)
+		    	    {
+		    		   document.getElementsByClassName("result")[i].classList.add("display");
+		    		   document.getElementsByClassName("result")[i].classList.remove("completed");
+		    		   document.getElementsByClassName("result")[i].classList.add("active");
+		    		   document.getElementById("checkall").classList.add("hidden");
+		    	    }
+		    	    document.getElementsByClassName("result")[i].classList.remove("checked");
 					document.getElementsByClassName("checkbox")[i].checked=false;
 					number++;
 	    	        nb(number);
@@ -194,8 +207,10 @@
     		   document.getElementsByClassName("result")[i].classList.remove("active");
     	    }
     	}
+    	document.getElementById("checkall").classList.remove("hidden");
 	}
 	function active(){
+		var numberactive=0;
 		var n = document.getElementById("ct").childElementCount;
     	for (var i = 0; i < n; i++) {
     		if(document.getElementsByClassName("result")[i].classList.contains("checked")==true)
@@ -205,11 +220,21 @@
     	    else
     	    {
     	       document.getElementsByClassName("result")[i].classList.add("active");
+               numberactive++;
                document.getElementsByClassName("result")[i].classList.remove("display");
     	    }
     	}
+    	if(numberactive>0)
+        {
+       	 document.getElementById("checkall").classList.remove("hidden");
+        }
+        else
+        {
+         document.getElementById("checkall").classList.add("hidden");
+        }
 	}
 	function completed(){
+		var numbercompleted=0;
 		var n = document.getElementById("ct").childElementCount;
         for (var i = 0; i < n; i++) {
     		if(document.getElementsByClassName("result")[i].classList.contains("checked")!=true)
@@ -219,10 +244,19 @@
     	    }
     	    else
     	    {
+    	       numbercompleted++;
                document.getElementsByClassName("result")[i].classList.remove("display");
                document.getElementsByClassName("result")[i].classList.add("completed");
     	    }
     	}
+    	if(numbercompleted>0)
+        {
+       	 document.getElementById("checkall").classList.remove("hidden");
+        }
+        else
+        {
+         document.getElementById("checkall").classList.add("hidden");
+        }
 	}
 	function clearcompleted(){
 		var n = document.getElementById("ct").childElementCount;

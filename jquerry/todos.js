@@ -30,7 +30,13 @@
 	    	for (var i = 0; i < n; i++) {
 	    		if($(".result")[i].classList.contains("checked")==false)
 	    		{
-	  
+	                if($(".result")[i].classList.contains("active")==true)
+		    	    {
+		    	       $(".result")[i].classList.add("display");
+		    		   $(".result")[i].classList.remove("active");
+		    		   $(".result")[i].classList.add("completed");
+		    		   document.getElementById("checkall").classList.add("hidden");
+		    	    }
 					$(".result")[i].classList.add("checked");
 					$(".checkbox")[i].checked=true;
 					number--;
@@ -42,7 +48,14 @@
 	    {
 	    	for (var i = 0; i < n; i++) {
 	    		if($(".result")[i].classList.contains("checked")==true)
-	    		{  
+	    		{
+	    			if($(".result")[i].classList.contains("completed")==true)
+		    	    {
+		    		   $(".result")[i].classList.add("display");
+		    		   $(".result")[i].classList.remove("completed");
+		    		   $(".result")[i].classList.add("active");
+		    		   document.getElementById("checkall").classList.add("hidden");
+		    	    }
 					$(".result")[i].classList.remove("checked");
 					$(".checkbox")[i].checked=false;
 					number++;
@@ -181,8 +194,10 @@
 				$(".result")[i].classList.remove("active");
 			}
 	    }
+	    document.getElementById("checkall").classList.remove("hidden");
 	}
 	function active(){
+		var numberactive=0;
 		var n = $("#ct").children().length;
     	for (var i = 0; i < n; i++) {
     		if($(".result")[i].classList.contains("checked")==true)
@@ -191,12 +206,22 @@
     	    }
     	    else
     	    {
+    	       numberactive++;
     	       $(".result")[i].classList.add("active");
                $(".result")[i].classList.remove("display");
     	    }
     	}
+    	if(numberactive>0)
+        {
+       	  document.getElementById("checkall").classList.remove("hidden");
+        }
+        else
+        {
+          document.getElementById("checkall").classList.add("hidden");
+        }
 	}
 	function completed(){
+		var numbercompleted=0;
 		var n = $("#ct").children().length;
 		for (var i = 0; i < n; i++) {
 			if($(".result")[i].classList.contains("checked")!=true)
@@ -206,10 +231,19 @@
 			}
 			else
 			{
+				numbercompleted++;
 				$(".result")[i].classList.remove("display");
 				$(".result")[i].classList.add("completed");
 			}
 		}
+		if(numbercompleted>0)
+        {
+       	 document.getElementById("checkall").classList.remove("hidden");
+        }
+        else
+        {
+         document.getElementById("checkall").classList.add("hidden");
+        }
 	}
 	function clearcompleted(){
 		var n = $("#ct").children().length;
