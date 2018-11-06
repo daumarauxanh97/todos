@@ -11,7 +11,7 @@
             	alert("you must write some thing");
             }
             else{
-            	myFunction();
+            	itemsList();
 		        numberoption++;
 		        if (numberoption==1) 
 		        {
@@ -62,7 +62,13 @@
 	        	$("#numberitems").text(number +" items left");
 	        }
 	}
-	function myFunction() {
+	function itemsList() {
+		// var html="<div class='result' id='"+id1+"'>"+
+		// +"<input type='checkbox' class='checkbox' onclick='checkItem("+id1+")' id='checkItem"+id1+"'>"+
+		// +"<div class='result-content' id='input"+id1+"' ondblclick='editContent('input"+id1+"')' "+
+		// +"onkeypress='submitEdit('input"+id1+"',event)'>"+$("#input").val()+"</div>"+
+		// +"<p id='deleteItem"+id1+"' onclick='deleteItem("+id1+")'>X<p>"
+		// +"</div>";
 	    var div = $("<div></div>");
 	    div.addClass("result");
 	    div.attr("id",id1);
@@ -71,12 +77,11 @@
 	    inputcheck.addClass("checkbox");
 	    inputcheck.attr("onclick", "checkItem("+id1+")");
 	    inputcheck.attr("id", "checkItem"+id1);
-	    var resultcontent = $("<input>").val($("#input").val());
-	    resultcontent.addClass("result-content input1");
-	    resultcontent.attr('disabled','disabled');
+	    var resultcontent = $("<div></div>").text($("#input").val());
+	    resultcontent.addClass("result-content ");
 	    resultcontent.attr("id", "input"+id1);
 	    resultcontent.attr("onkeypress", "submitEdit('input"+id1+"',event)");
-	    div.attr("ondblclick", "editContent('input"+id1+"')");
+	    resultcontent.attr("ondblclick", "editContent('input"+id1+"')");
 	    var p= $("<p></p>").text("x");
 	    p.attr("id", "deleteItem"+id1);
 	    p.attr("onclick","deleteItem("+id1+")");
@@ -124,12 +129,12 @@
 	    	$("#"+parentId).remove();
         }
     function editContent(id){ 
-    	$("#"+id).removeAttr('disabled');
+    	$("#"+id).attr('contenteditable','');
     }
     function submitEdit(id,event){
-		if($("#"+id).val().trim()!=""){
+		if($("#"+id).text().trim()!=""){
 	        if (event.keyCode === 13) {
-		        $("#"+id).attr('disabled','disabled');
+		        $("#"+id).removeAttr('contenteditable');
 		        alert("Update success");
 		    }
 		}

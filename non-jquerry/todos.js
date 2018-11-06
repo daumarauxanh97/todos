@@ -74,14 +74,13 @@
 	    inputcheck.setAttribute("type", "checkbox");
 	    inputcheck.setAttribute("class", "checkbox");
 	    inputcheck.setAttribute("onclick", "checkbox("+id1+")");
-	    var resultcontent = document.createElement("input");
-	    resultcontent.setAttribute("type","text");
-	    resultcontent.setAttribute("class","result-content input1");
+	    var resultcontent = document.createElement("div");
+	    resultcontent.setAttribute("class","result-content ");
 	    resultcontent.setAttribute("id","input"+id1);
 	    resultcontent.setAttribute("onkeypress","submitEdit('input"+id1+"',event)");
-	    resultcontent.value=input.value;
-	    resultcontent.disabled=true;
-	    div.setAttribute("ondblclick","editContent('input"+id1+"')");
+	    var content= document.createTextNode(input.value);
+	    resultcontent.appendChild(content);
+	    resultcontent.setAttribute("ondblclick","editContent('input"+id1+"')");
 	    var p= document.createElement("p");
 	    p.setAttribute("onclick", "deleteItem("+id1+")");
 	    var x = document.createTextNode("x");
@@ -123,13 +122,13 @@
     }
     function editContent(id){
         var edit = document.getElementById(id);
-        edit.disabled=false;
+        edit.setAttribute('contenteditable','');
     }
     function submitEdit(id,event){
     	var submit=document.getElementById(id);
-		if(submit.value.trim()!=""){
+		if(submit.innerText.trim()!=""){
 	        if (event.keyCode === 13) {
-		        submit.disabled = true;
+		        submit.removeAttribute('contenteditable');
 		        alert("Update success");
 		    }
 		}

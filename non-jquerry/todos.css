@@ -42,7 +42,7 @@ p:hover{
 }
 .result{
     width: 600px;
-    height: 70px;
+    min-height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,6 +51,8 @@ p:hover{
     font-size: 18px;
     width: 490px;
     padding: 10px 10px 10px 5px;
+    border-bottom: 1px solid red;
+    word-wrap: break-word;
     
 }
 #options{
