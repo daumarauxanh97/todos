@@ -1,0 +1,82 @@
+body{
+    width: 100%;
+    margin: 0px;
+    background-color: lightgray;
+}
+.container{
+    padding-top: 80px;
+    width: 600px;
+    margin: auto;
+}
+.headline{
+    text-align: center;
+    color: red;
+    font-size: 40px;
+}
+.content{
+    width: 600px;
+    background-color: white;
+    /*border-bottom: 1px solid lightgray*/
+    border-bottom: 1px solid red;  
+}
+.add{
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input{
+    flex: 1;
+    padding: 10px;
+    font-size: 20px;
+}
+.input1{
+    flex: 1;
+    font-size: 20px;
+}
+p{
+    padding: 0px 10px 0px 10px;
+}
+p:hover{
+    color: red;
+}
+.result{
+    width: 600px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.result-content{
+    font-size: 18px;
+    width: 490px;
+    padding: 10px 10px 10px 5px;
+    
+}
+#options{
+    display: flex;
+    width: 600px;
+    background-color: white;
+    justify-content: center;
+    padding: 15px 0px 15px 0px;
+}
+#options button{
+    margin-left: 5px;
+    padding: 0px 10px;
+}
+.display{
+    display: none;
+}
+#numberitems{
+    width: 130px;
+    margin-top: 15px ;
+    margin-left: 30px;  
+}
+.flexrow{
+    display: flex;
+}
+.checked{
+    background-color: gray;
+    text-decoration: line-through;
+}
+
