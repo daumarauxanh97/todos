@@ -36,7 +36,7 @@
 	    		{
 	  
 					document.getElementsByClassName("result")[i].classList.add("checked");
-					document.getElementsByTagName("input")[i+1].checked=true;
+					document.getElementsByClassName("checkbox")[i].checked=true;
 					number--;
 	    	        nb(number);
 	    		}
@@ -48,7 +48,7 @@
 	    		if(document.getElementsByClassName("result")[i].classList.contains("checked")==true)
 	    		{  
 					document.getElementsByClassName("result")[i].classList.remove("checked");
-					document.getElementsByTagName("input")[i+1].checked=false;
+					document.getElementsByClassName("checkbox")[i].checked=false;
 					number++;
 	    	        nb(number);
 	    		}
@@ -72,6 +72,7 @@
 	    div.setAttribute("id",id1);
 	    var inputcheck= document.createElement("input");
 	    inputcheck.setAttribute("type", "checkbox");
+	    inputcheck.setAttribute("class", "checkbox");
 	    inputcheck.setAttribute("onclick", "checkbox("+id1+")");
 	    var resultcontent = document.createElement("input");
 	    resultcontent.setAttribute("type","text");
@@ -105,6 +106,7 @@
 	    		document.getElementById(id).classList.remove("checked");
 	    		number++;
 		    	nb(number);
+		    	checked.checked=false;
 	    	}
 	    	else  
 	    	{
@@ -116,6 +118,7 @@
 	    		document.getElementById(id).classList.add("checked");
                 number--;
 		    	nb(number);
+		    	checked.checked=true;
 	    	}
     }
     function editContent(id){
@@ -156,20 +159,25 @@
 	    var all = document.createElement("button");
         var active = document.createElement("button");
         var completed = document.createElement("button");
+        var clearcompleted = document.createElement("button");
         var all1 = document.createTextNode("All");
         var active1 = document.createTextNode("Active");
         var completed1 = document.createTextNode("Completed");
+        var clearcompleted1 = document.createTextNode("Clear completed");
         all.setAttribute("onclick","allItems()");
         active.setAttribute("onclick","active()");
         completed.setAttribute("onclick","completed()");
+        clearcompleted.setAttribute("onclick","clearcompleted()");
         all.appendChild(all1);
         active.appendChild(active1);
         completed.appendChild(completed1);
+        clearcompleted.appendChild(clearcompleted1);
         document.getElementById("op").appendChild(divnumberitems);
         document.getElementById("op").appendChild(divoptions);
         document.getElementById("options").appendChild(all);
         document.getElementById("options").appendChild(active);
         document.getElementById("options").appendChild(completed);
+        document.getElementById("options").appendChild(clearcompleted);
 	}
 	function allItems(){
 		var n = document.getElementById("ct").childElementCount;
@@ -214,6 +222,15 @@
     	    {
                document.getElementsByClassName("result")[i].classList.remove("display");
                document.getElementsByClassName("result")[i].classList.add("completed");
+    	    }
+    	}
+	}
+	function clearcompleted(){
+		var n = document.getElementById("ct").childElementCount;
+		for (var i = n-1; i >=0 ; i--) {
+    		if(document.getElementsByClassName("result")[i].classList.contains("checked")==true)
+    	    {
+    		   document.getElementsByClassName("result")[i].parentNode.removeChild(document.getElementsByClassName("result")[i]);    		   
     	    }
     	}
 	}

@@ -32,7 +32,7 @@
 	    		{
 	  
 					$(".result")[i].classList.add("checked");
-					$("input")[i+1].checked=true;
+					$(".checkbox")[i].checked=true;
 					number--;
 	    	        numberitems(number);
 	    		}
@@ -44,7 +44,7 @@
 	    		if($(".result")[i].classList.contains("checked")==true)
 	    		{  
 					$(".result")[i].classList.remove("checked");
-					$("input")[i+1].checked=false;
+					$(".checkbox")[i].checked=false;
 					number++;
 	    	        numberitems(number);
 	    		}
@@ -68,6 +68,7 @@
 	    div.attr("id",id1);
 	    var inputcheck= $("<input>");
 	    inputcheck.attr("type", "checkbox");
+	    inputcheck.addClass("checkbox");
 	    inputcheck.attr("onclick", "checkItem("+id1+")");
 	    inputcheck.attr("id", "checkItem"+id1);
 	    var resultcontent = $("<input>").val($("#input").val());
@@ -98,6 +99,7 @@
     		$("#"+parentId).removeClass("checked");
     		number++;
 	    	numberitems(number);
+	    	$("#checkItem"+id).removeAttr("checked");
     	}
     	else  
     	{
@@ -109,6 +111,7 @@
     		$("#"+parentId).addClass("checked");
             number--;
 	    	numberitems(number);
+	    	$("#checkItem"+id).attr("checked","checked");
     	}
     }
     function deleteItem(id){
@@ -145,14 +148,17 @@
 	    var all = $("<button></button>").text("All");
         var active = $("<button></button>").text("Active");
         var completed = $("<button></button>").text("Completed");
+        var clearcompleted = $("<button></button>").text("Clear completed");
         all.attr("onclick","allItems()");
         active.attr('onclick', "active()");
         completed.attr("onclick","completed()");
+        clearcompleted.attr("onclick","clearcompleted()");
         $("#op").append(divnumberitems);
         $("#op").append(divoptions);
         $("#options").append(all);
         $("#options").append(active);
         $("#options").append(completed);
+        $("#options").append(clearcompleted);
     }
 	function allItems(){
 		var n = $("#ct").children().length;
@@ -199,4 +205,13 @@
 				$(".result")[i].classList.add("completed");
 			}
 		}
+	}
+	function clearcompleted(){
+		var n = $("#ct").children().length;
+		for (var i = n-1; i >=0 ; i--) {
+    		if($(".result")[i].classList.contains("checked")==true)
+    	    {
+    		   $(".result")[i].parentNode.removeChild(document.getElementsByClassName("result")[i]);    		   
+    	    }
+    	}
 	}

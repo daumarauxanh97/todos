@@ -27,8 +27,10 @@ body{
 }
 .input{
     flex: 1;
+
     padding: 10px;
     font-size: 20px;
+    word-wrap: break-word;
 }
 .input1{
     flex: 1;
