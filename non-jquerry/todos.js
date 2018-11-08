@@ -10,7 +10,34 @@
 	input.addEventListener("keypress", function(event) {
 		if(input.value.trim()!=""){
 	        if (event.keyCode === 13) {
-		        myFunction();
+		        if(document.getElementById("ct").classList.contains("allTab"))
+            	{
+            		itemsList();
+            	}
+            	else if(document.getElementById("ct").classList.contains("activeTab"))
+            	{
+            		itemsList();
+            		var n = document.getElementById("ct").childElementCount;
+            		document.getElementsByClassName("result")[n-1].classList.add("active");
+            		document.getElementById("checkall").classList.remove("hidden");
+            	}
+            	else if(document.getElementById("ct").classList.contains("completedTab"))
+            	{
+            		itemsList();
+            		var n = document.getElementById("ct").childElementCount;
+            		if(document.getElementById("ct").classList.contains("completedTab"))
+            		{
+            			document.getElementsByClassName("result")[n-1].classList.add("display");
+            		}
+            		if(document.getElementById("ct").classList.contains("activeTab"))
+            		{
+            			document.getElementsByClassName("result")[n-1].classList.remove("display");
+            		}
+            		if(document.getElementById("ct").classList.contains("allTab"))
+            		{
+            			document.getElementsByClassName("result")[n-1].classList.remove("display");
+            		}           		
+            	}
 		        numberoption++;
 		        if (numberoption==1) 
 		        {
@@ -18,6 +45,7 @@
 		        }
 		        number++;
 		        nb(number);
+		        input.value="";
 		    }
 		}
 		else
@@ -79,7 +107,7 @@
 	        	numberitems.innerHTML=number+" items left";
 	        }
 	}
-	function myFunction() {
+	function itemsList() {
 	    var div = document.createElement("div");
 	    div.setAttribute("class","result");
 	    div.setAttribute("id",id1);
@@ -102,8 +130,7 @@
 	    document.getElementById(id1).appendChild(inputcheck);
 	    document.getElementById(id1).appendChild(resultcontent);
 	    document.getElementById(id1).appendChild(p);
-	    id1++;
-        input.value="";       
+	    id1++;       
     }
     function checkbox(id){
     	var checked = document.getElementById(id);
@@ -192,6 +219,10 @@
         document.getElementById("options").appendChild(clearcompleted);
 	}
 	function allItems(){
+		document.getElementsByClassName("headline")[0].innerHTML="todos-all";
+		document.getElementById("ct").classList.remove("activeTab");
+		document.getElementById("ct").classList.remove("completedTab");
+		document.getElementById("ct").classList.add("allTab");
 		var n = document.getElementById("ct").childElementCount;
     	for (var i = 0; i < n; i++) {
     		if(document.getElementsByClassName("result")[i].classList.contains("display")==true)
@@ -210,6 +241,10 @@
     	document.getElementById("checkall").classList.remove("hidden");
 	}
 	function active(){
+		document.getElementsByClassName("headline")[0].innerHTML="todos-active";
+		document.getElementById("ct").classList.add("activeTab");
+		document.getElementById("ct").classList.remove("completedTab");
+		document.getElementById("ct").classList.remove("allTab");
 		var numberactive=0;
 		var n = document.getElementById("ct").childElementCount;
     	for (var i = 0; i < n; i++) {
@@ -234,6 +269,10 @@
         }
 	}
 	function completed(){
+		document.getElementsByClassName("headline")[0].innerHTML="todos-completed";
+		document.getElementById("ct").classList.add("completedTab");
+		document.getElementById("ct").classList.remove("allTab");
+		document.getElementById("ct").classList.remove("activeTab");
 		var numbercompleted=0;
 		var n = document.getElementById("ct").childElementCount;
         for (var i = 0; i < n; i++) {
@@ -266,4 +305,12 @@
     		   document.getElementsByClassName("result")[i].parentNode.removeChild(document.getElementsByClassName("result")[i]);    		   
     	    }
     	}
+	}
+	function downloadContent(name, content) {
+	  // var atag = document.createElement("a");
+	  // var file = new Blob([content], {type: 'text/plain'});
+	  // atag.href = URL.createObjectURL(file);
+	  // atag.download = name;
+	  // atag.click();
+
 	}
