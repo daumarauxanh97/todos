@@ -393,6 +393,7 @@
             }
         };
         reader.readAsBinaryString(fileInput.files[0]);
+        fileInput.value="";
     });
 
 
